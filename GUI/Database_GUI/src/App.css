@@ -10,4 +10,28 @@
   height: 100%;
   background-color: #333;
   color: #fff;
+  padding-bottom:1% ;
+}
+input[type="text"] {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 0.1rem solid transparent;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  color: #fff;
+  transition: border-color 0.25s;
+}
+input[type="text"]:focus {
+  outline: none;
+}
+input[type="text"]::selection {
+  background-color: transparent;
+}
+.title{
+  font-size: 2.5em;
+  font-weight: bolder;
+  margin: 1%;
 }

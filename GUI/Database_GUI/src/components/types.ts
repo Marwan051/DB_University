@@ -47,5 +47,6 @@ type data = {
     [key: string]: Grade;
 } | {
     [key: string]: Department;
-} 
+}  
+
 export type {student, course, instructor, Grade, Department, data}

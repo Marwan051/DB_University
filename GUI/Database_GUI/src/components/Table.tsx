@@ -19,50 +19,6 @@ const Table = ({ data }: data) => {
 
   const submit = () => {
     if (gridApi) {
-      const url = "http://localhost:8080/atsht/submitSheet.php";
-      const bodyData = [];
-      const columnDefs = gridApi.getColumnDefs();
-
-      for (let i = 0; i < gridApi.getDisplayedRowCount(); i++) {
-        const rowNode = gridApi.getDisplayedRowAtIndex(i);
-        const rowData: { id: any; dates: any[] } = {
-          id: rowNode?.data.id,
-          dates: [],
-        };
-        if (columnDefs && rowNode) {
-          for (const columnDef of columnDefs) {
-            if ("field" in columnDef && columnDef.field != undefined) {
-              const cellValue = rowNode.data[columnDef.field];
-              if (cellValue === false) {
-                // Push the date into the dates array
-                rowData.dates.push(columnDef.field);
-              }
-            }
-          }
-
-          // Check if the dates array is not empty
-          if (rowData.dates.length > 0) {
-            bodyData.push(rowData);
-          }
-        } else {
-          console.log("gridApi not ready");
-        }
-      }
-      fetch(url, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(bodyData),
-      })
-        .then(async (response) => {
-          response = await response.json();
-          console.log(response);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
     }
   };
 
