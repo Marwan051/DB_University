@@ -30,7 +30,7 @@ input[type="text"]::selection {
 .ag-header-cell-label {
   justify-content: center;
 }
-.add-dialog{
+.dialog{
   display: flex;
   gap: 0.5rem;
   flex-direction: column;
@@ -41,5 +41,11 @@ input[type="text"]::selection {
  
 }
 .input-field input[type="text"]:disabled {
-  background-color: rgba(128, 128, 128, 0.5); /* semi-transparent grey */
+  background-color: rgba(128, 128, 128, 0.5); 
+}
+.input-field input[type="date"] {
+ 
+  background-color: rgb(1, 1, 21);
+  color: white;
+  border: rgb(59, 57, 57);
 }

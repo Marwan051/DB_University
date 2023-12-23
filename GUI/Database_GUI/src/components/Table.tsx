@@ -5,7 +5,7 @@ import "ag-grid-community/styles/ag-theme-material.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import getColumns from "./getColumns";
 import { GridApi, GridReadyEvent } from "ag-grid-community";
-import { AddEntry, EditEntry } from ".";
+import { AddEntry, EditEntry, editData } from ".";
 import edit from "../assets/edit.png";
 interface TableProps {
   data: any; // Replace 'any' with the actual type of 'data'
@@ -18,6 +18,11 @@ const Table = ({ data, filterText }: TableProps) => {
   const [showAdd, setShowAdd] = useState(false);
   const [addColumns, setAddColumns] = useState<string[]>([]);
   const [showEdit, setShowEdit] = useState(false);
+
+  const [editData, setEditData] = useState<editData>({
+    keys: [],
+    values: [],
+  });
 
   useEffect(() => {
     setRowData(Object.values(data));
@@ -36,7 +41,9 @@ const Table = ({ data, filterText }: TableProps) => {
 
   const closeAddDialog = () => {
     setShowAdd(false);
-    console.log(showAdd);
+  };
+  const closeEditDialog = () => {
+    setShowEdit(false);
   };
   const addEntry = async () => {
     try {
@@ -64,8 +71,33 @@ const Table = ({ data, filterText }: TableProps) => {
       console.error("Error fetching data:", error);
     }
   };
-  function openPopup(): void {
-    throw new Error("Function not implemented.");
+  async function getEditdata() {
+    try {
+      await fetch(`http://localhost:8080/university_db/getEdit.php`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ editData: gridApi?.getSelectedRows()[0] }),
+        credentials: "include",
+      })
+        .then((response) => response.json())
+        .then((fetchedData) => {
+          if (fetchedData === null || fetchedData[0] === "none found") {
+            console.log("Fetched data is null");
+            return;
+          } else {
+            console.log(fetchedData);
+            setEditData(fetchedData);
+            setShowEdit(true);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   }
 
   return (
@@ -86,6 +118,14 @@ const Table = ({ data, filterText }: TableProps) => {
                 addColumns={addColumns}
               />
             )}
+            {showEdit && (
+              <EditEntry
+                isOpen={showEdit}
+                closeDialog={closeEditDialog}
+                editData={editData}
+                row={gridApi?.getSelectedRows()[0]}
+              />
+            )}
           </div>
           <AgGridReact
             className="ag-theme-quartz-dark"
@@ -96,8 +136,10 @@ const Table = ({ data, filterText }: TableProps) => {
                 field: "openPopup",
                 cellRenderer: () => (
                   <button
-                    onClick={() => {
-                      setShowEdit(true);
+                    onClick={async () => {
+                      await getEditdata();
+
+                      //setShowEdit(true);
                     }}
                   >
                     <img
@@ -115,7 +157,7 @@ const Table = ({ data, filterText }: TableProps) => {
             paginationPageSize={20}
             quickFilterText={filterText}
             rowSelection="single"
-            suppressCellFocus
+            //suppressCellFocus
           />
         </>
       ) : (

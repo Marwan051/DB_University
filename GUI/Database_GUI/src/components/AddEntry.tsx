@@ -72,12 +72,18 @@ const AddEntry = ({ isOpen, closeDialog, addColumns }: TableProps) => {
           submit(e);
         }}
       >
-        <div className="add-dialog">
+        <div className="dialog">
           {addColumns?.map((column) => {
+            const chars = column.slice(0, 4).toLowerCase();
+            console.log(chars);
             return (
               <div className="input-field">
                 <label htmlFor={column}>{column}</label>
-                <input type="text" id={column} onChange={handleChange} />
+                <input
+                  type={chars === "date" ? "date" : "text"}
+                  id={column}
+                  onChange={handleChange}
+                />
               </div>
             );
           })}

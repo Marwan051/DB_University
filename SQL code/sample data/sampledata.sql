@@ -1,5 +1,5 @@
 -- add departments
-INSERT INTO `department` (`Dep_Name`, `Dep_id`) VALUES
+INSERT INTO `department` (`Dep_Name`, `department_id`) VALUES
 	('Data Science', '200'),
 	('Ai', '201'),
 	('Cyber Security', '202'),
@@ -22,11 +22,11 @@ VALUES
   ('Marwan', 'Tamer', '1982-03-11', 10, 'marwantamer@gmail.com', 204);
 
 -- Update department heads
-UPDATE department SET Dep_head = 1 WHERE Dep_id = 200;
-UPDATE department SET Dep_head = 2 WHERE Dep_id = 201;
-UPDATE department SET Dep_head = 3 WHERE Dep_id = 202;
-UPDATE department SET Dep_head = 4 WHERE Dep_id = 203;
-UPDATE department SET Dep_head = 5 WHERE Dep_id = 204;
+UPDATE department SET Dep_head = 1 WHERE department_id = 200;
+UPDATE department SET Dep_head = 2 WHERE department_id = 201;
+UPDATE department SET Dep_head = 3 WHERE department_id = 202;
+UPDATE department SET Dep_head = 4 WHERE department_id = 203;
+UPDATE department SET Dep_head = 5 WHERE department_id = 204;
 
 
 -- add instructor's phones
@@ -43,7 +43,7 @@ INSERT INTO `Instructor_phone` (`phone_number`, `Instructor_id`) VALUES
 	('41928376', '10');
 
 -- add students
-INSERT INTO `student` (`FName`, `LName`, `std_id`, `Acadimic_year`, `student_Email`, `Date_Of_birth`) VALUES
+INSERT INTO `student` (`FName`, `LName`, `student_id`, `Acadimic_year`, `student_Email`, `Date_Of_birth`) VALUES
     ('Ahmed', 'Nagy', '1001', '1', 'ahmednagy@gmail.com', '2002-01-15'),
     ('Mohamed', 'Nasef', '2001', '2', 'mohamednasef@gmail.com', '2001-03-22'),
     ('Mahmoud', 'Abd Elrheem', '3001', '3', 'mahmoudabd elrheem@gmail.com', '2000-05-10'),
@@ -78,7 +78,7 @@ INSERT INTO `student` (`FName`, `LName`, `std_id`, `Acadimic_year`, `student_Ema
     ('Nagy', 'Nasef', '4008', '4', 'nagynasef@gmail.com', '2000-02-15');
 
 -- add student phone
-INSERT INTO `student_phone` (`phone_number`, `std_id`) VALUES
+INSERT INTO `student_phone` (`phone_number`, `student_id`) VALUES
 	('1234567', '1001'),
 	('8901234', '1002'),
 	('5678901', '1003'),
@@ -126,7 +126,7 @@ INSERT INTO `student_phone` (`phone_number`, `std_id`) VALUES
 	('Calculus', '10203', '3', '8','');
 
 -- add grades
-INSERT INTO `grade` (`std_id`, `course_id`, `grade_id`, `grade`) VALUES
+INSERT INTO `grade` (`student_id`, `course_id`, `grade_id`, `grade`) VALUES
 	('1001', '1202', '0', 'D-'),
 	('2001', '2201', '1', 'D+'),
 	('3001', '3200', '2', 'C'),
@@ -206,7 +206,7 @@ INSERT INTO `grade` (`std_id`, `course_id`, `grade_id`, `grade`) VALUES
 
 
 -- add enrolling
-INSERT INTO `enrolling` (`enroling_id`, `std_id`, `course_id`) VALUES
+INSERT INTO `enrolling` (`enrolling_id`, `student_id`, `course_id`) VALUES
 	('0', '1001', '1202'),
 	('1', '2001', '2201'),
 	('2', '3001', '3200'),

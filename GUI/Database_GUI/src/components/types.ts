@@ -51,4 +51,8 @@ type data = {
 type table_names = {
     table_names: String[],
 }
-export type {student, course, instructor, Grade, Department, data, table_names}
+type editData = {
+    keys: string[],
+    values:{[key:string]: string}[],
+}
+export type {student, course, instructor, Grade, Department, data, table_names, editData}

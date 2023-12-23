@@ -16,7 +16,7 @@ const getColumns = (data:column_data) : Column[] => {
     field: key,
     hide: index === 0 ? true : false,
     suppressToolPanel: index === 0 ? true : false,
-    editable: index === 0 || key == 'Name' ? false : true
+
   }));
     return columns;
   

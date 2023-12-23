@@ -1,5 +1,5 @@
-import { student, course, instructor, Grade, Department,data,table_names} from './types'
-export type { student, course, instructor, Grade, Department, data ,table_names}
+import { student, course, instructor, Grade, Department,data,table_names,editData} from './types'
+export type { student, course, instructor, Grade, Department, data ,table_names,editData}
 
 import Selection from "./Selection"
 import Table from './Table'
