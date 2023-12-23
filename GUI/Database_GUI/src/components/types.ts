@@ -48,5 +48,7 @@ type data = {
 } | {
     [key: string]: Department;
 }  
-
-export type {student, course, instructor, Grade, Department, data}
+type table_names = {
+    table_names: String[],
+}
+export type {student, course, instructor, Grade, Department, data, table_names}
