@@ -4,28 +4,38 @@ import { editData } from ".";
 interface TableProps {
   isOpen: boolean;
   closeDialog: () => void;
-  row: string[];
+  row: Row;
   editData: editData;
 }
+interface Row {
+  [key: string]: string;
+}
+interface FormData {
+  [key: string]: any;
+}
+
 const EditEntry = ({ isOpen, closeDialog, editData, row }: TableProps) => {
+  const id =
+    Object.keys(row)[Object.keys(row).length - 1] === "phone_number"
+      ? Object.values(row)[2]
+      : Object.values(row)[0];
   const handleChange = (e: { target: { id: any; value: any } }) => {
     setFormData({
       ...formData,
       [e.target.id]: e.target.value,
     });
   };
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState<FormData>({});
   const [message, setMessage] = useState("");
   const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
     try {
       await fetch(`http://localhost:8080/university_db/submitEdit.php`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ editData: formData }),
+        body: JSON.stringify({ id: id, formData: formData }),
         credentials: "include",
       })
         .then((response) => response.json())
@@ -34,8 +44,12 @@ const EditEntry = ({ isOpen, closeDialog, editData, row }: TableProps) => {
             console.log("Fetched data is null");
             return;
           } else {
-            console.log(fetchedData);
             setMessage(fetchedData.message);
+            if (fetchedData.message === "Data updated successfully") {
+              Object.keys(formData).forEach((key) => {
+                row[key] = formData[key];
+              });
+            }
           }
         })
         .catch((error) => {
@@ -74,7 +88,7 @@ const EditEntry = ({ isOpen, closeDialog, editData, row }: TableProps) => {
         }}
       >
         <div className="dialog">
-          {Object.keys(editData.values[0]).map((column, index) => {
+          {Object.keys(editData.values[0]).map((column) => {
             const chars = column.slice(0, 4).toLowerCase();
             return (
               <div className="input-field">

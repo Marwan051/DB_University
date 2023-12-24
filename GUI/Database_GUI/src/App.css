@@ -49,3 +49,6 @@ input[type="text"]::selection {
   color: white;
   border: rgb(59, 57, 57);
 }
+.ag-header-cell-resize{
+  z-index: 0;
+}

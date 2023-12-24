@@ -87,7 +87,6 @@ const Table = ({ data, filterText }: TableProps) => {
             console.log("Fetched data is null");
             return;
           } else {
-            console.log(fetchedData);
             setEditData(fetchedData);
             setShowEdit(true);
           }
@@ -157,7 +156,6 @@ const Table = ({ data, filterText }: TableProps) => {
             paginationPageSize={20}
             quickFilterText={filterText}
             rowSelection="single"
-            //suppressCellFocus
           />
         </>
       ) : (

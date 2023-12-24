@@ -16,7 +16,6 @@ const getColumns = (data:column_data) : Column[] => {
     field: key,
     hide: index === 0 ? true : false,
     suppressToolPanel: index === 0 ? true : false,
-
   }));
     return columns;
   
