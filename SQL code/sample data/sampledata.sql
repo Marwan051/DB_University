@@ -1,5 +1,5 @@
--- add departments
-INSERT INTO `department` (`Dep_Name`, `department_id`) VALUES
+-- add Departments
+INSERT INTO `Department` (`Department_Name`, `Department_id`) VALUES
 	('Data Science', '200'),
 	('Ai', '201'),
 	('Cyber Security', '202'),
@@ -8,7 +8,7 @@ INSERT INTO `department` (`Dep_Name`, `department_id`) VALUES
 
 
 -- add instructors
-INSERT INTO instructor (Fname, Lname, Date_of_birth, Instructor_id, Instructor_email, Department_id)
+INSERT INTO Instructor (Fname, Lname, Date_of_birth, Instructor_id, Instructor_email, Department_id)
 VALUES
   ('Mohamed', 'Ali', '1990-10-02', 1, 'mohamedali@gmail.com', 200),
   ('Ahmed', 'Mostafa', '1985-11-03', 2, 'ahmededmostafa@gmail.com', 204),
@@ -21,12 +21,12 @@ VALUES
   ('Mostafa', 'Ali', '1995-04-10', 9, 'mostaedali@gmail.com', 202),
   ('Marwan', 'Tamer', '1982-03-11', 10, 'marwantamer@gmail.com', 204);
 
--- Update department heads
-UPDATE department SET Dep_head = 1 WHERE department_id = 200;
-UPDATE department SET Dep_head = 2 WHERE department_id = 201;
-UPDATE department SET Dep_head = 3 WHERE department_id = 202;
-UPDATE department SET Dep_head = 4 WHERE department_id = 203;
-UPDATE department SET Dep_head = 5 WHERE department_id = 204;
+-- Update Department heads
+UPDATE Department SET Department_head = 1 WHERE Department_id = 200;
+UPDATE Department SET Department_head = 2 WHERE Department_id = 201;
+UPDATE Department SET Department_head = 3 WHERE Department_id = 202;
+UPDATE Department SET Department_head = 4 WHERE Department_id = 203;
+UPDATE Department SET Department_head = 5 WHERE Department_id = 204;
 
 
 -- add instructor's phones
@@ -114,16 +114,18 @@ INSERT INTO `student_phone` (`phone_number`, `student_id`) VALUES
 
 -- add courses
     INSERT INTO `course` (`course_name`, `course_id`, `credit_hours`, `Instructor_id`, `prerequsite`) VALUES
-	('Machine Learning', '1202', '3', '5', '4202'),
-	('Intro To Ai', '2201', '3', '7', '5201'),
-	('Data Science', '3200', '3', '1', '6200'),
-	('Data Structure', '4202', '3', '9', ''),
-	('Regression', '5201', '3', '3', ''),
-	('Linar Algebra', '6200', '3', '6', ''),
-	('Data Methodology', '7204', '3', '2', ''),
-	('Data Tools', '8204', '3', '10', '7204'),
-	('Data Mining', '9203', '3', '4', '10203'),
-	('Calculus', '10203', '3', '8','');
+    ('Calculus', '10203', '3', '8',null),
+	('Data Structure', '4202', '3', '9', null),
+	('Linear Algebra', '6200', '3', '6', null),
+	('Data Methodology', '7204', '3', '2', null),    
+	('Intro To Ai', '2201', '3', '7', '10203'),
+	('Machine Learning', '1202', '3', '5', '2201'),
+    ('Regression', '5201', '3', '3', '2201'),
+	('Data Science', '3200', '3', '1', '10203'),
+	('Data Tools', '8204', '3', '10', '3200'),
+    ('Data Mining', '9203', '3', '4', '8204');
+	
+	
 
 -- add grades
 INSERT INTO `grade` (`student_id`, `course_id`, `grade_id`, `grade`) VALUES

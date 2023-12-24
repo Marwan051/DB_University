@@ -8,10 +8,11 @@ import { GridApi, GridReadyEvent } from "ag-grid-community";
 import { AddEntry, EditEntry, editData } from ".";
 import edit from "../assets/edit.png";
 interface TableProps {
-  data: any; // Replace 'any' with the actual type of 'data'
-  filterText: string; // Assuming 'filterText' is a string
+  data: any;
+  filterText: string;
+  fetchData: () => void;
 }
-const Table = ({ data, filterText }: TableProps) => {
+const Table = ({ data, filterText, fetchData }: TableProps) => {
   const [gridApi, setGridApi] = useState<GridApi>();
   const [rowData, setRowData] = useState<Object[]>([]);
   const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
@@ -41,6 +42,7 @@ const Table = ({ data, filterText }: TableProps) => {
 
   const closeAddDialog = () => {
     setShowAdd(false);
+    fetchData();
   };
   const closeEditDialog = () => {
     setShowEdit(false);

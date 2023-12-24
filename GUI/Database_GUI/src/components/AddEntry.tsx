@@ -29,12 +29,11 @@ const AddEntry = ({ isOpen, closeDialog, addColumns }: TableProps) => {
       })
         .then((response) => response.json())
         .then((fetchedData) => {
-          if (fetchedData === null || fetchedData[0] === "error") {
+          if (fetchedData === null) {
             console.log("Fetched data is null");
             return;
           } else {
-            console.log(fetchedData);
-            setMessage(fetchedData.message);
+            setMessage(fetchedData["message"]);
           }
         })
         .catch((error) => {
@@ -75,7 +74,7 @@ const AddEntry = ({ isOpen, closeDialog, addColumns }: TableProps) => {
         <div className="dialog">
           {addColumns?.map((column) => {
             const chars = column.slice(0, 4).toLowerCase();
-            console.log(chars);
+
             return (
               <div className="input-field">
                 <label htmlFor={column}>{column}</label>
